@@ -1,0 +1,6 @@
+1.	processors:
+2.	  probabilistic_sampler:
+3.	    sampling_percentage: 20
+4.	    attribute_source: attribute in the trace # possible values: service name  
+
+

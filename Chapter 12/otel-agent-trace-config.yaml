@@ -1,0 +1,54 @@
+1.	    receivers:
+2.	      otlp:
+3.	        protocols:
+4.	          grpc:
+5.	            endpoint: ${env:MY_POD_IP}:4317
+6.	          http:
+7.	            endpoint: ${env:MY_POD_IP}:4318    
+8.	
+9.	    processors:
+10.	      resource:
+11.	        attributes:
+12.	        - action: insert
+13.	          key: env
+14.	          value: K8S
+15.	      k8sattributes:
+16.	      memory_limiter:
+17.	        check_interval: 1s
+18.	        limit_mib: 4000
+19.	        spike_limit_mib: 800
+20.	      filter/creditcard:
+21.	        error_mode: ignore
+22.	        traces:
+23.	          span:
+24.	            - attributes["http.route"] == "/credit-card"
+25.	      batch:
+26.	        send_batch_size: 10000
+27.	        timeout: 10s
+28.	
+29.	    exporters:
+30.	      awsxray:
+31.	        region: us-east-1
+32.	        index_all_attributes: true
+33.	
+34.	
+35.	    extensions:
+36.	      health_check:
+37.	      pprof:
+38.	        endpoint: :1888
+39.	      zpages:
+40.	        endpoint: :55679
+41.	      # replace this with your region
+42.	      sigv4auth:
+43.	        service: "aps"
+44.	        region: "us-east-1"
+45.	
+46.	    service:
+47.	      extensions: [pprof, zpages, health_check, sigv4auth]
+48.	      pipelines:
+49.	   
+50.	        traces/1:
+51.	          receivers: [otlp]
+52.	          processors: [filter/creditcard, batch]
+53.	          exporters: [logging, awsxray]
+

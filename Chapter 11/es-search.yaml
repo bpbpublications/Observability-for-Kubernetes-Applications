@@ -1,0 +1,19 @@
+1.	{
+2.	  "job_id": "anomaly_detection_request_rate",
+3.	  "description": "Anomaly detection on request rate",
+4.	  "analysis_config": {
+5.	    "bucket_span": "5m",
+6.	    "detectors": [
+7.	      {
+8.	        "function": "count",
+9.	        "field_name": "",
+10.	        "detector_description": "Count of requests",
+11.	        "partition_field_name": "response.keyword"
+12.	      }
+13.	    ]
+14.	  },
+15.	  "data_description": {
+16.	    "time_field": "@timestamp"
+17.	  }
+18.	}
+

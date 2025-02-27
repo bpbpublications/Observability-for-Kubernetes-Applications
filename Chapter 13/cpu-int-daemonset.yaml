@@ -1,0 +1,19 @@
+1.	apiVersion: apps/v1
+2.	kind: Deployment
+3.	metadata:
+4.	name: cpu-int-app
+5.	spec:
+6.	replicas: 1
+7.	selector:
+8.	matchLabels:
+9.	app: cpu-int-app
+10.	template:
+11.	metadata:
+12.	labels:
+13.	app: cpu-int-app
+14.	spec:
+15.	containers:
+16.	- name: cpu-int-app
+17.	image: python:3.8
+18.	command: ["python", "cpu-intensive-python.py"]
+

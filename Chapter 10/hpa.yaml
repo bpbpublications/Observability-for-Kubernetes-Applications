@@ -1,0 +1,19 @@
+1.	apiVersion: autoscaling/v2beta2
+2.	kind: HorizontalPodAutoscaler
+3.	metadata:
+4.	name: my-app-hpa
+5.	spec:
+6.	scaleTargetRef:
+7.	apiVersion: apps/v1
+8.	kind: Deployment
+9.	name: my-app
+10.	minReplicas: 1
+11.	maxReplicas: 10
+12.	metrics:
+13.	- type: Resource
+14.	resource:
+15.	name: cpu
+16.	targetAverageUtilization: 50
+
+
+

@@ -1,0 +1,67 @@
+1.	cat << EOF > petadoption-runbook.doc
+2.	Application Name: PetAdoptions Production Application
+3.	 
+4.	Application Description: This Application enables people to easily adopt pets, It is a digital marketplace of over 10,000 animal shelters and rescue groups across the US, Canada, and Mexico. As the leading pet adoption platform, This application has helped millions of pets find their forever homes.
+5.	
+6.	Account info: 111111111111 (Primary Account), 222222222222 (DR Account)
+7.	 
+8.	Application Owners:
+9.	            Development Lead: Puneeth Komaragiri 
+10.	            Development Manager: Vikram Venkataraman
+11.	            Program/Product Manager: Puneeth Komaragiri
+12.	            On-call Alias: petadoptionsoncall@example.com
+13.	
+14.	Severity: Critical
+15.	 
+16.	Public Facing: Yes
+17.	 
+18.	DR/Backup Environment: Yes; (us-west-2 is the backup/DR for us-east-1 env)
+19.	 
+20.	Core AWS Services used:
+21.	
+22.	* S3
+23.	* EKS
+24.	* Dynamo-Db
+25.	* ELB
+26.	* SQS
+27.	* SNS
+28.	* CloudWatch 
+29.	* CloudFront
+30.	
+31.	Regions: us-east-1 (Northern Virginia) & us-west-2 (Oregon)
+32.	
+33.	Core infrastructure components: 
+34.	
+35.	Dynamo-DB Global Table : pet-adoption-table
+36.	EKS Clusters: PetSite-FrontEnd,PetSearch-API, PetListAdoptions-API,PayForAdoptions-API, PetAdoptionStatusUpdater, PetAdoptionsHistory-API
+37.	Lambda Functions: PriceLessThan55, PriceGreaterThan55,PetAdoptionStatusUpdater
+38.	S3 Bucket: petadoptionss3bucket
+39.	
+40.	 
+41.	Previously Occurred/ Known Issues & Fixes:
+42.	In very rare cases, you might encounter a behavior where the site does not show any pet images. Click on Perform Housekeeping in the PetSite home page upper right corner.
+43.	 
+44.	 
+45.	Failing over to DR Region:
+46.	            Description: The RTO (Recovery Time Objective) & RPO(Recovery Point Objective) Requirement for this application is 45mins. The Application needs to be failed-over to the active DR region in us-west-2 in case the outage lasts more than 30mins. The Application will be failed back after 24 hours of observing the primary region. 
+47.	
+48.	Procedure: To failover to the DR region, The User will need to run the “DR-FAILOVER“ workflow from the Central-DevOps-Account.
+49.	 
+50.	Troubleshooting:
+51.	
+52.	    * Is there an AWS Outage?
+53.	        * Check https://health.aws.amazon.com/health/status for AWS service health.
+54.	            
+55.	    * How to reach AWS?
+56.	        * If Application is Down for customers, Cut an AWS Support ticket using link https://console.aws.amazon.com/support
+57.	        * See https://docs.aws.amazon.com/awssupport/latest/user/case-management.html for support case severity
+58.	        * Always open a Phone/Chat case for high, Urgent & Critical severity cases
+59.	            
+60.	        * Reach out to the Account Team Alias Email (sampleaccountteamemail@amazon.com) for additional help.
+61.	    *  How to escalate to the Application team?
+62.	        
+63.	        * Please reach out to the on-call via phone/email oncallpetadoptionapplication@example.com
+64.	---
+65.	EOF
+
+

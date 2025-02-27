@@ -1,0 +1,8 @@
+1.	 # Propogators Library
+2.	from opentelemetry.propagators.aws import AwsXRayPropagator
+3.	from opentelemetry.propagators.aws.aws_xray_propagator import (
+4.	    TRACE_ID_DELIMITER,
+5.	    TRACE_ID_FIRST_PART_LENGTH,
+6.	    TRACE_ID_VERSION,
+7.	)
+

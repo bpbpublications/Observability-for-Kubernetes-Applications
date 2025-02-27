@@ -1,0 +1,8 @@
+1.	# HELP otelcol_exporter_enqueue_failed_spans Number of spans failed to be added to the sending queue.
+2.	# TYPE otelcol_exporter_enqueue_failed_spans counter
+3.	otelcol_exporter_enqueue_failed_spans{exporter="trace",service_instance_id="123-456-890",service_name="otel-collector",service_version="v0.25.0"} 0
+4.	
+5.	# HELP otelcol_process_runtime_total_sys_memory_bytes Total bytes of memory obtained from the OS (see 'go doc runtime.MemStats.Sys')
+6.	# TYPE otelcol_process_runtime_total_sys_memory_bytes gauge
+7.	otelcol_process_runtime_total_sys_memory_bytes{service_instance_id="234-566-900",service_name="otel-collector",service_version="v0.25.0"} 2.4462344e+07
+

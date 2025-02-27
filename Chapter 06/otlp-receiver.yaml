@@ -1,0 +1,13 @@
+1.	receivers:
+2.	  otlp:
+3.	    protocols:
+4.	      grpc:
+5.	        endpoint: 0.0.0.0:4317
+6.	      http:
+7.	        endpoint: 0.0.0.0:4318
+8.	  otlp/2:
+9.	    protocols:
+10.	      grpc:
+11.	        endpoint: 0.0.0.0:55690
+
+

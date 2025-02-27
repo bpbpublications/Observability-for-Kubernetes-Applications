@@ -1,0 +1,9 @@
+1.	<source>
+2.	  @type http
+3.	  port 8888
+4.	  bind 0.0.0.0
+5.	</source>
+6.	<match test.cycle>
+7.	  @type stdout
+8.	</match>
+

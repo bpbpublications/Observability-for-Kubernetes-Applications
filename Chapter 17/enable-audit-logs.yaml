@@ -1,0 +1,16 @@
+1.	apiVersion: audit.k8s.io/v1
+2.	kind: Policy
+3.	rules:
+4.	- level: Metadata
+5.	resources:
+6.	- group: ""
+7.	resources: ["pods"]
+8.	- level: Request
+9.	resources:
+10.	- group: ""
+11.	resources: ["secrets"]
+12.	- level: RequestResponse
+13.	resources:
+14.	- group: ""
+15.	resources: ["configmaps"]
+

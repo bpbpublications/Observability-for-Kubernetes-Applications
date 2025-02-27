@@ -1,0 +1,24 @@
+1.	    processors:
+2.	      memory_limiter:
+3.	        check_interval: 1s
+4.	        limit_mib: 4000
+5.	        spike_limit_mib: 800
+6.	      groupbytrace:
+7.	        wait_duration: 10s
+8.	        num_traces: 2000
+9.	      tail_sampling:
+10.	        decision_wait: 1s
+11.	        policies:
+12.	          - name: and-policy
+13.	            type: and
+14.	            and:
+15.	              and_sub_policy:
+16.	                - name: error-policy
+17.	                  type: status_code
+18.	                  status_code:
+19.	                    status_codes: ["ERROR", "UNSET"]
+20.	                - name: probabilistic-policy
+21.	                  type: probabilistic
+22.	                  probabilistic:
+23.	                    sampling_percentage: 20
+

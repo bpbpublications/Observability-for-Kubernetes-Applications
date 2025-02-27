@@ -1,0 +1,12 @@
+1.	from memory_profiler import profile
+2.	import time
+3.	
+4.	@profile
+5.	def my_function():
+6.	a = [i for i in range(100000)]
+7.	time.sleep(5)
+8.	return a
+9.	
+10.	if __name__ == "__main__":
+11.	my_function()
+

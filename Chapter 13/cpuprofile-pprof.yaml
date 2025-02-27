@@ -1,0 +1,33 @@
+1.	package main
+2.	
+3.	import (
+4.	"fmt"
+5.	"os"
+6.	"runtime/pprof"
+7.	"time"
+8.	)
+9.	
+10.	func main() {
+11.	// Create a CPU profile file
+12.	f, err := os.Create("cpu_profile.prof")
+13.	if err != nil {
+14.	fmt.Println("Could not create CPU profile: ", err)
+15.	return
+16.	}
+17.	defer f.Close()
+18.	
+19.	// Start CPU profiling
+20.	if err := pprof.StartCPUProfile(f); err != nil {
+21.	fmt.Println("Could not start CPU profile data: ", err)
+22.	return
+23.	}
+24.	defer pprof.StopCPUProfile()
+25.	
+26.	// Simulate some work
+27.	for i := 0; i < 1000; i++ {
+28.	fmt.Printf("%d ", i)
+29.	}
+30.	
+31.	time.Sleep(5 * time.Second)
+32.	}
+

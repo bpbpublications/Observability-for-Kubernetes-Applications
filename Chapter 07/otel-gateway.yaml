@@ -1,0 +1,39 @@
+1.	server {
+2.	    listen 4317 http2;
+3.	    server_name _;
+4.	
+5.	    location / {
+6.	            grpc_pass      grpc://collector4317;
+7.	            grpc_next_upstream     error timeout invalid_header http_500;
+8.	            grpc_connect_timeout   2;
+9.	            grpc_set_header        Host            $host;
+10.	            grpc_set_header        X-Real-IP       $remote_addr;
+11.	            grpc_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+12.	    }
+13.	}
+14.	
+15.	server {
+16.	    listen 4318;
+17.	    server_name _;
+18.	
+19.	    location / {
+20.	            proxy_pass      http://collector4318;
+21.	            proxy_redirect  off;
+22.	            proxy_next_upstream     error timeout invalid_header http_500;
+23.	            proxy_connect_timeout   2;
+24.	            proxy_set_header        Host            $host;
+25.	            proxy_set_header        X-Real-IP       $remote_addr;
+26.	            proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+27.	    }
+28.	}
+29.	
+30.	upstream collector4317 {
+31.	    server collector1:4317;
+32.	    server collector2:4317;
+33.	}
+34.	
+35.	upstream collector4318 {
+36.	    server collector1:4318;
+37.	    server collector2:4318;
+38.	}
+

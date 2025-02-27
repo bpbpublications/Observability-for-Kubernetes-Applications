@@ -1,0 +1,22 @@
+1.	# Python: Using OpenTelemetry
+2.	from opentelemetry import trace
+3.	from opentelemetry.trace import SpanKind
+4.	from opentelemetry.trace.status import StatusCode
+5.	
+6.	# Start a span for a specific operation
+7.	with tracer.start_as_current_span("fund_transfer", kind=SpanKind.CLIENT) as span:
+8.	# Perform authentication
+9.	authenticate_user()
+10.	
+11.	# Authorization check
+12.	authorize_transaction()
+13.	
+14.	# Processing the transaction
+15.	process_transaction()
+16.	
+17.	# Send notification
+18.	send_notification()
+19.	
+20.	# Mark the span as successful
+21.	span.set_status(StatusCode.OK)
+

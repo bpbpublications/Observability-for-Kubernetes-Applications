@@ -1,0 +1,9 @@
+exporters:
+2.	      awscloudwatchlogs:
+3.	        log_group_name: "/adot/riv-cop401"
+4.	        log_stream_name: "cop401"
+5.	        region: "us-east-1"
+6.	        endpoint: "logs.us-east-1.amazonaws.com"
+7.	        log_retention: 365
+8.	        raw_log: false
+

@@ -1,0 +1,27 @@
+1.	apiVersion: apps/v1
+2.	kind: DaemonSet
+3.	metadata:
+4.	name: ebpf-network-monitor
+5.	namespace: kube-system
+6.	spec:
+7.	selector:
+8.	matchLabels:
+9.	name: ebpf-network-monitor
+10.	template:
+11.	metadata:
+12.	labels:
+13.	name: ebpf-network-monitor
+14.	spec:
+15.	containers:
+16.	- name: ebpf-network-monitor
+17.	image: your-docker-repo/ebpf-network-monitor:latest
+18.	securityContext:
+19.	privileged: true
+20.	volumeMounts:
+21.	- name: bpf-fs
+22.	mountPath: /sys/fs/bpf
+23.	volumes:
+24.	- name: bpf-fs
+25.	hostPath:
+26.	path: /sys/fs/bpf
+

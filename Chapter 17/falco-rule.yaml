@@ -1,0 +1,8 @@
+1.	- rule: Terminal shell in container
+2.	desc: >
+3.	A shell was run inside a container with an interactive terminal.
+4.	condition: container && spawned_process && proc.name in (bash, sh)
+5.	output: "Shell spawned in container (user=%user.name command=%proc.cmdline)"
+6.	priority: WARNING
+7.	tags: [container, shell, k8s]
+

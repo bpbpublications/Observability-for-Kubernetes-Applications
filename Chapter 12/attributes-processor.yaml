@@ -1,0 +1,12 @@
+1.	processors:
+2.	  attributes/example:
+3.	    actions:
+4.	      - key: account_name
+5.	        value: test-account
+6.	        action: insert
+7.	      - key: password
+8.	        action: delete
+9.	      - key: http.status_code
+10.	        action: convert
+11.	        converted_type: int
+

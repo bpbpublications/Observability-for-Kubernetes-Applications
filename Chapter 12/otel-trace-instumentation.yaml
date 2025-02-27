@@ -1,0 +1,5 @@
+1.	# SDK Libraries
+2.	from opentelemetry.sdk.trace import TracerProvider
+3.	from opentelemetry.sdk.trace.export import BatchSpanProcessor
+4.	from opentelemetry.sdk.extension.aws.trace import AwsXRayIdGenerator
+

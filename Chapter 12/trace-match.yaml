@@ -1,0 +1,7 @@
+1.	processors:
+2.	  filter:
+3.	    error_mode: ignore
+4.	    traces:
+5.	      span:
+6.	        - IsMatch(resource.attributes["k8s.pod.name"], "my-k8s-pod-trace")
+

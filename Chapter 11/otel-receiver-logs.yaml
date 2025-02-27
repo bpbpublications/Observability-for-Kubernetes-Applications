@@ -1,0 +1,64 @@
+receivers:
+2.	      filelog:
+3.	        include: 
+4.	        - /var/log/pods/*/*/*.log 
+5.	        include_file_name: false
+6.	        include_file_path: true
+7.	        operators:
+8.	        - id: get-format
+9.	          routes:
+10.	          - expr: body matches "^\\{"
+11.	            output: parser-docker
+12.	          - expr: body matches "^[^ Z]+ "
+13.	            output: parser-crio
+14.	          - expr: body matches "^[^ Z]+Z"
+15.	            output: parser-containerd
+16.	          type: router
+17.	        - id: parser-crio
+18.	          output: extract_metadata_from_filepath
+19.	          regex: ^(?P<time>[^ Z]+) (?P<stream>stdout|stderr) (?P<logtag>[^ ]*) ?(?P<log>.*)$
+20.	          timestamp:
+21.	            layout: 2006-01-02T15:04:05.999999999Z07:00
+22.	            layout_type: gotime
+23.	            parse_from: attributes.time
+24.	          type: regex_parser
+25.	        - id: parser-containerd    
+26.	          output: extract_metadata_from_filepath
+27.	          regex: ^(?P<time>[^ ^Z]+Z) (?P<stream>stdout|stderr) (?P<logtag>[^ ]*) ?(?P<log>.*)$
+28.	          timestamp:
+29.	            layout: '%Y-%m-%dT%H:%M:%S.%LZ'
+30.	            parse_from: attributes.time
+31.	          type: regex_parser
+32.	        - id: parser-docker
+33.	          output: extract_metadata_from_filepath
+34.	          timestamp:
+35.	            layout: '%Y-%m-%dT%H:%M:%S.%LZ'
+36.	            parse_from: attributes.time
+37.	          type: json_parser
+38.	        - id: extract_metadata_from_filepath
+39.	          parse_from: attributes["log.file.path"]
+40.	          regex: ^.*\/(?P<namespace>[^_]+)_(?P<pod_name>[^_]+)_(?P<uid>[a-f0-9\-]+)\/(?P<container_name>[^\._]+)\/(?P<restart_count>\d+)\.log$
+41.	          type: regex_parser
+42.	        - from: attributes.stream
+43.	          to: attributes["log.iostream"]
+44.	          type: move
+45.	        - from: attributes.container_name
+46.	          to: resource["k8s.container.name"]
+47.	          type: move
+48.	        - from: attributes.namespace
+49.	          to: resource["k8s.namespace.name"]
+50.	          type: move
+51.	        - from: attributes.pod_name
+52.	          to: resource["k8s.pod.name"]
+53.	          type: move
+54.	        - from: attributes.restart_count
+55.	          to: resource["k8s.container.restart_count"]
+56.	          type: move
+57.	        - from: attributes.uid
+58.	          to: resource["k8s.pod.uid"]
+59.	          type: move
+60.	        - from: attributes.log
+61.	          to: body
+62.	          type: move
+63.	        start_at: beginning
+

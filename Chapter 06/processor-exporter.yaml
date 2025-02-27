@@ -1,0 +1,48 @@
+1.	processors:
+2.	  # Data sources: traces, metrics, logs
+3.	  batch:
+4.	
+5.	  # Data sources: metrics
+6.	  filter:
+7.	    metrics:
+8.	      include:
+9.	        match_type: regexp
+10.	        metric_names:
+11.	          - prefix/.*
+12.	          - prefix_.*
+13.	
+14.	  # Data sources: traces, metrics, logs
+15.	  memory_limiter:
+16.	    check_interval: 5s
+17.	    limit_mib: 4000
+18.	    spike_limit_mib: 500
+19.	
+20.	exporters:
+21.	  # Data sources: traces, metrics, logs
+22.	  file:
+23.	    path: ./filename.json
+24.	
+25.	  # Data sources: traces
+26.	  otlp/jaeger:
+27.	    endpoint: jaeger-server:4317
+28.	    tls:
+29.	      cert_file: cert.pem
+30.	      key_file: cert-key.pem
+31.	
+32.	  # Data sources: traces, metrics, logs
+33.	  kafka:
+34.	    protocol_version: 2.0.0
+35.	
+36.	  # Data sources: metrics
+37.	  prometheus:
+38.	    endpoint: 0.0.0.0:8889
+39.	    namespace: default
+40.	
+41.	  # Data sources: metrics
+42.	  prometheusremotewrite:
+43.	    endpoint: http://prometheus.example.com:9411/api/prom/push
+44.	    # When using the official Prometheus (running via Docker)
+45.	    # endpoint: 'http://prometheus:9090/api/v1/write', add:
+46.	    # tls:
+47.	    #   insecure: true
+

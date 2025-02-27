@@ -1,0 +1,1 @@
+1.	OTEL_RESOURCE_ATTRIBUTES=service.name=observable-app,service.namespace=devteam java -javaagent:path/to/opentelemetry-agent.jar -jar myapp.jar

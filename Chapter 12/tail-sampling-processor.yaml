@@ -1,0 +1,36 @@
+1.	receivers:
+2.	otlp:
+3.	protocols:
+4.	grpc:
+5.	http:
+6.	
+7.	processors:
+8.	batch:
+9.	timeout: 1s
+10.	tailsampling:
+11.	decision_wait: 30s
+12.	num_traces: 100000
+13.	expected_new_traces_per_sec: 100
+14.	policies:
+15.	- name: error_traces
+16.	type: status_code
+17.	status_code:
+18.	status_codes: [ERROR]
+19.	- name: high_latency_traces
+20.	type: latency
+21.	latency:
+22.	threshold_ms: 1000
+23.	
+24.	exporters:
+25.	logging:
+26.	logLevel: debug
+27.	otlp:
+28.	endpoint: "your-exporter-endpoint:4317"
+29.	
+30.	service:
+31.	pipelines:
+32.	traces:
+33.	receivers: [otlp]
+34.	processors: [batch, tailsampling]
+35.	exporters: [logging, otlp]
+

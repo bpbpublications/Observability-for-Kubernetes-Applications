@@ -1,0 +1,8 @@
+1.	processors:
+2.	metricstransform:
+3.	transforms:
+4.	- metric_name: "nginx_container_resource_requests_cpu_cores"
+5.	action: "aggregate"
+6.	aggregation_type: "sum"
+7.	new_name: "service_cpu_usage"
+

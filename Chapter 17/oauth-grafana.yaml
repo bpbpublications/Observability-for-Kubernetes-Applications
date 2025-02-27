@@ -1,0 +1,11 @@
+1.	auth.generic_oauth:
+2.	enabled: true
+3.	name: OAuth
+4.	allow_sign_up: true
+5.	client_id: your-client-id
+6.	client_secret: your-client-secret
+7.	scopes: openid profile email
+8.	auth_url: https://your-idp.com/oauth/authorize
+9.	token_url: https://your-idp.com/oauth/token
+10.	api_url: https://your-idp.com/oauth/userinfo
+

@@ -1,0 +1,12 @@
+1.	groups:
+2.	- name: high-cpu-usage
+3.	rules:
+4.	- alert: HighCPUUsage
+5.	expr: sum(rate(container_cpu_usage_seconds_total{job="kubelet"}[1m])) > 90
+6.	for: 5m
+7.	labels:
+8.	severity: critical
+9.	annotations:
+10.	summary: "High CPU usage detected"
+11.	description: "CPU usage on {{ $labels.instance }} is above 90% for more than 5 minutes."
+

@@ -1,0 +1,80 @@
+2.	apiVersion: v1
+3.	kind: ConfigMap
+4.	metadata:
+5.	  name: adot-collector-conf
+6.	  namespace: default
+7.	  labels:
+8.	    app: aws-adot
+9.	    component: adot-collector-conf
+10.	data:
+11.	  adot-collector-config: |
+12.	    receivers:
+13.	      otlp:
+14.	        protocols:
+15.	          grpc:
+16.	            endpoint: ${env:MY_POD_IP}:4317
+17.	          http:
+18.	            endpoint: ${env:MY_POD_IP}:4318    
+19.	      prometheus:
+20.	        config:
+21.	          global:
+22.	            scrape_interval: 15s
+23.	            scrape_timeout: 10s
+24.	
+25.	          scrape_configs:
+26.	          - job_name: 'kubernetes-service-endpoints'
+27.	
+28.	            kubernetes_sd_configs:
+29.	            - role: endpoints
+30.	
+31.	            tls_config:
+32.	              ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+33.	              insecure_skip_verify: true
+34.	            bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+35.	
+36.	            relabel_configs:
+37.	            - source_labels: [__meta_kubernetes_service_annotation_scrape]
+38.	              action: keep
+39.	              regex: true
+40.	    processors:
+41.	      resource:
+42.	        attributes:
+43.	        - action: insert
+44.	          key: env
+45.	          value: eks127
+46.	      k8sattributes:
+47.	      memory_limiter:
+48.	        check_interval: 1s
+49.	        limit_mib: 4000
+50.	        spike_limit_mib: 800
+51.	  
+52.	    exporters:
+53.	      prometheusremotewrite:
+54.	        # replace this with your endpoint
+55.	        endpoint: "https://prometheus-backend.svc.cluster.local/remote_write"
+56.	        auth:
+57.	          authenticator: sigv4auth
+58.	        namespace: "default"
+59.	      logging:
+60.	        loglevel: debug
+61.	
+62.	    extensions:
+63.	      health_check:
+64.	      pprof:
+65.	        endpoint: :1888
+66.	      zpages:
+67.	        endpoint: :55679
+68.	      # replace this with your region
+69.	      sigv4auth:
+70.	        service: "aps"
+71.	        region: "us-east-1"
+72.	
+73.	    service:
+74.	      extensions: [pprof, zpages, health_check, sigv4auth]
+75.	      pipelines:
+76.	        metrics:
+77.	          receivers: [otlp, prometheus]
+78.	          processors: [batch]
+79.	          exporters: [logging, prometheusremotewrite]
+
+

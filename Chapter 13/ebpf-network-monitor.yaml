@@ -1,0 +1,26 @@
+1.	#include <uapi/linux/ptrace.h>
+2.	#include <uapi/linux/in.h>
+3.	#include <uapi/linux/in6.h>
+4.	#include <bcc/proto.h>
+5.	
+6.	BPF_HASH(pkt_count, u32, u64);
+7.	
+8.	int trace_ip(struct __sk_buff *skb) {
+9.	u32 src_ip = 0, dst_ip = 0;
+10.	
+11.	// Retrieve IP addresses from the packet
+12.	bpf_skb_load_bytes(skb, offsetof(struct iphdr, saddr), &src_ip, sizeof(src_ip));
+13.	bpf_skb_load_bytes(skb, offsetof(struct iphdr, daddr), &dst_ip, sizeof(dst_ip));
+14.	
+15.	// Update packet count
+16.	u64 *count = pkt_count.lookup(&src_ip);
+17.	if (count) {
+18.	(*count)++;
+19.	} else {
+20.	u64 init_count = 1;
+21.	pkt_count.update(&src_ip, &init_count);
+22.	}
+23.	
+24.	return 0;
+25.	}
+

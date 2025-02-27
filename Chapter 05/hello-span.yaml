@@ -1,0 +1,23 @@
+1.	{
+2.	  "name": "hello",
+3.	  "context": {
+4.	    "trace_id": "0x5b8aa5a2d2c872e8321cf37308d69df2",
+5.	    "span_id": "0x051581bf3cb55c13"
+6.	  },
+7.	  "parent_id": null,
+8.	  "start_time": "2022-04-29T18:52:58.114201Z",
+9.	  "end_time": "2022-04-29T18:52:58.114687Z",
+10.	  "attributes": {
+11.	    "http.route": "some_route1"
+12.	  },
+13.	  "events": [
+14.	    {
+15.	      "name": "Guten Tag!",
+16.	      "timestamp": "2022-04-29T18:52:58.114561Z",
+17.	      "attributes": {
+18.	        "event_attributes": 1
+19.	      }
+20.	    }
+21.	  ]
+22.	}
+

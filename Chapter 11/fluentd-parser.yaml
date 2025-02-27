@@ -1,0 +1,11 @@
+@type tail
+2.	  path /var/log/containers/*.log
+3.	  pos_file /var/log/fluentd-containers.log.pos
+4.	  tag kube.*
+5.	  <parse>
+6.	    @type regexp
+7.	    expression /^(?<time>[^ ]* [^ ]*) (?<stream>stdout|stderr) (?<log>.*)$/
+8.	    time_format %Y-%m-%dT%H:%M:%S.%N%:z
+9.	  </parse>
+10.	</source>
+

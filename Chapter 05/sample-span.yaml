@@ -1,0 +1,35 @@
+1.	{
+2.	  "name": "/v1/sys/health",
+3.	  "context": {
+4.	    "trace_id": "7bba9f33312b3dbb8b2c2c62bb7abe2d",
+5.	    "span_id": "086e83747d0e381e"
+6.	  },
+7.	  "parent_id": "",
+8.	  "start_time": "2021-10-22 16:04:01.209458162 +0000 UTC",
+9.	  "end_time": "2021-10-22 16:04:01.209514132 +0000 UTC",
+10.	  "status_code": "STATUS_CODE_OK",
+11.	  "status_message": "",
+12.	  "attributes": {
+13.	    "net.transport": "IP.TCP",
+14.	    "net.peer.ip": "172.17.0.1",
+15.	    "net.peer.port": "51820",
+16.	    "net.host.ip": "10.177.2.152",
+17.	    "net.host.port": "26040",
+18.	    "http.method": "GET",
+19.	    "http.target": "/v1/sys/health",
+20.	    "http.server_name": "mortar-gateway",
+21.	    "http.route": "/v1/sys/health",
+22.	    "http.user_agent": "Consul Health Check",
+23.	    "http.scheme": "http",
+24.	    "http.host": "10.177.2.152:26040",
+25.	    "http.flavor": "1.1"
+26.	  },
+27.	  "events": [
+28.	    {
+29.	      "name": "",
+30.	      "message": "OK",
+31.	      "timestamp": "2021-10-22 16:04:01.209512872 +0000 UTC"
+32.	    }
+33.	  ]
+34.	}
+

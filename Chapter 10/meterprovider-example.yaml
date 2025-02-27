@@ -1,0 +1,22 @@
+1.	+-- MeterProvider(default)
+2.	    |
+3.	    +-- Meter(name='io.opentelemetry.runtime', version='1.0.0')
+4.	    |   |
+5.	    |   +-- Instrument<Asynchronous Gauge, int>(name='cpython.gc', attributes=['generation'], unit='kB')
+6.	    |   |
+7.	    |   +-- instruments...
+8.	    |
+9.	    +-- Meter(name='io.opentelemetry.contrib.mongodb.client', version='2.3.0')
+10.	        |
+11.	        +-- Instrument<Counter, int>(name='client.exception', attributes=['type'], unit='1')
+12.	        |
+13.	        +-- Instrument<Histogram, double>(name='client.duration', attributes=['server.address', 'server.port'], unit='ms')
+14.	        |
+15.	        +-- instruments...
+16.	
+17.	+-- MeterProvider(custom)
+18.	    |
+19.	    +-- Meter(name='bank.payment', version='23.3.5')
+20.	        |
+21.	        +-- instruments...
+

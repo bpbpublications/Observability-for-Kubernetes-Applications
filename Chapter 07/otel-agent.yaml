@@ -1,0 +1,20 @@
+1.	receivers:
+2.	  otlp: # the OTLP receiver the app is sending traces to
+3.	    protocols:
+4.	      grpc:
+5.	        endpoint: 0.0.0.0:4317
+6.	
+7.	processors:
+8.	  batch:
+9.	
+10.	exporters:
+11.	  otlp/jaeger: # Jaeger supports OTLP directly
+12.	    endpoint: https://jaeger.example.com:4317
+13.	
+14.	service:
+15.	  pipelines:
+16.	    traces/dev:
+17.	      receivers: [otlp]
+18.	      processors: [batch]
+19.	      exporters: [otlp/jaeger]
+

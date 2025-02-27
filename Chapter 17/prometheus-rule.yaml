@@ -1,0 +1,18 @@
+1.	apiVersion: monitoring.coreos.com/v1
+2.	kind: PrometheusRule
+3.	metadata:
+4.	name: api-server-high-requests
+5.	namespace: monitoring
+6.	spec:
+7.	groups:
+8.	- name: api-server.rules
+9.	rules:
+10.	- alert: APIServerHighRequestRate
+11.	expr: rate(apiserver_request_total[5m]) > 100
+12.	for: 10m
+13.	labels:
+14.	severity: critical
+15.	annotations:
+16.	summary: "High API Server Request Rate"
+17.	description: "The API server is experiencing a high rate of requests."
+

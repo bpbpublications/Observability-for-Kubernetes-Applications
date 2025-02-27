@@ -1,0 +1,8 @@
+1.	    service:
+2.	      extensions: [pprof, zpages, health_check, sigv4auth]
+3.	      pipelines:
+4.	        logs:
+5.	          receivers: [filelog]
+6.	          processors: [k8sattributes, resource]
+7.	          exporters: [awscloudwatchlogs]
+
